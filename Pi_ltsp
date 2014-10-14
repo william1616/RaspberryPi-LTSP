@@ -1931,6 +1931,7 @@ UserGroups() {
   	"Launch-graphical" "Launch a graphical user management panel" \
     "Enable-Sudo" "Enables the use of sudo for pupils. Used for GPIO access" \
     "Disable-Sudo" "Disables the use of sudo for pupils" \
+    "CSV-Import" "Import Users from a CSV File" \
     3>&1 1>&2 2>&3)
 
 #<<COMMENT1
@@ -1981,6 +1982,10 @@ case "$MENUEPT" in
     whiptail --title "Samba" --msgbox 'User has been removed from samba. ' 12 78
     Menu
 	;;
+    CSV-Import)
+      filepath=$(whiptail --inputbox "Enter the absolute path of the CSV File" 8 78 $INIT --title "CSV" 3>&1 1>&2 2>&3)
+      sudo python Scripts/importUsers.py $filepath
+    ;;
     *)
     Menu
     ;;
